@@ -2,7 +2,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on BlogCine</title>
-<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/page/</link>
         <description>Recent content in Pages on BlogCine</description>
         <generator>Hugo -- gohugo.io</generator>
@@ -13,18 +12,6 @@
         <pubDate>Fri, 20 Jun 2025 00:40:11 +0100</pubDate>
         
         <guid>https://bemohcine.github.io/blog/iptv-checker/</guid>
-=======
-        <link>/page/</link>
-        <description>Recent content in Pages on BlogCine</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Fri, 20 Jun 2025 00:40:11 +0100</lastBuildDate><atom:link href="/page/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Iptv Checker</title>
-        <link>/iptv-checker/</link>
-        <pubDate>Fri, 20 Jun 2025 00:40:11 +0100</pubDate>
-        
-        <guid>/iptv-checker/</guid>
->>>>>>> 0f18e29 (Initial commit)
         <description>&lt;h1 id=&#34;this-is-iptv-checker&#34;&gt;this is iptv checker
 &lt;/h1&gt;&lt;p&gt;{{ define &amp;ldquo;main&amp;rdquo; }}&lt;/p&gt;
 &lt;div class=&#34;container mx-auto max-w-5xl p-6 prose prose-invert&#34;&gt;
@@ -289,32 +276,18 @@
         </item>
         <item>
         <title>Archives</title>
-<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/archives/</link>
         <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/archives/</guid>
-=======
-        <link>/archives/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
-        
-        <guid>/archives/</guid>
->>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         <item>
         <title>Links</title>
-<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/links/</guid>
-=======
-        <link>/links/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>/links/</guid>
->>>>>>> 0f18e29 (Initial commit)
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -346,17 +319,10 @@
         </item>
         <item>
         <title>Search</title>
-<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/search/</guid>
-=======
-        <link>/search/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>/search/</guid>
->>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         
