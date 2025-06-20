@@ -9,7 +9,11 @@
   <meta name="description" content="Check and verify your IPTV M3U and M3U8 playlists online. Identify working channels, remove broken links, and generate cleaned playlists effortlessly with our IPTV M3U Checker tool." />
   <meta name="keywords" content="IPTV checker, M3U checker, M3U8 playlist checker, IPTV playlist validator, IPTV channel status, IPTV playlist cleaner, IPTV stream checker, IPTV M3U online tool" />
   <meta name="robots" content="index, follow" />
+<<<<<<< HEAD
   <link rel="canonical" href="https://bemohcine.github.io/blog/iptv-m3u-checker" />
+=======
+  <link rel="canonical" href="iptv-m3u-checker" />
+>>>>>>> 0f18e29 (Initial commit)
 
   <!-- Social Meta (Open Graph) -->
   <meta property="og:title" content="IPTV M3U Checker – Validate & Clean Your IPTV Playlists Easily" />
@@ -230,6 +234,316 @@ http://..."
 
   <script>
     // (Existing JavaScript from your snippet, no changes needed here)
+<<<<<<< HEAD
   </script>
 </body>
 </html>
+=======
+  // Wait for DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('iptv-form');
+    const fileInput = document.getElementById('m3u-file');
+    const textInput = document.getElementById('m3u-text');
+    const checkBtn = document.getElementById('check-btn');
+    const resultsSection = document.getElementById('results-section');
+    const resultsBody = document.getElementById('results-body');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const loadingProgress = document.getElementById('loading-progress');
+    const loadingCurrent = document.getElementById('loading-current');
+    const progressBarFill = document.getElementById('progress-bar-fill');
+    const selectOnlineBtn = document.getElementById('select-online-btn');
+    const selectAllBtn = document.getElementById('select-all-btn');
+    const deselectAllBtn = document.getElementById('deselect-all-btn');
+    const selectAllHeaderCheckbox = document.getElementById('select-all-header');
+    const generateBtn = document.getElementById('generate-btn');
+    const outputSection = document.getElementById('output-section');
+    const outputM3U = document.getElementById('output-m3u');
+    const copyBtn = document.getElementById('copy-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const generateFeedback = document.getElementById('generate-feedback');
+    const copyFeedback = document.getElementById('copy-feedback');
+
+    let channels = []; // Will hold parsed channel info {name, url, status, selected}
+
+    // Helper: Parse M3U content into channel objects
+    function parseM3U(content) {
+      const lines = content.split(/\r?\n/).map(l => l.trim());
+      const parsed = [];
+      for(let i = 0; i < lines.length; i++) {
+        if(lines[i].startsWith('#EXTINF')) {
+          const nameMatch = lines[i].match(/,(.*)$/);
+          const name = nameMatch ? nameMatch[1].trim() : 'Unknown';
+          let url = '';
+          if(i + 1 < lines.length) {
+            url = lines[i+1].trim();
+            i++;
+          }
+          if(url) {
+            parsed.push({name, url, status: 'unchecked', selected: true});
+          }
+        }
+      }
+      return parsed;
+    }
+
+    // Hybrid check: first try fetch with no-cors, fallback to audio element
+    function checkURLByFetch(url, timeout = 4000) {
+      return new Promise(async (resolve) => {
+        try {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), timeout);
+          // mode: 'no-cors' -> opaque response, but no error if request sent
+          await fetch(url, {method: 'HEAD', mode: 'no-cors', signal: controller.signal});
+          clearTimeout(id);
+          resolve(true);
+        } catch {
+          resolve(false);
+        }
+      });
+    }
+
+    function checkURLByAudio(url, timeout = 4000) {
+      return new Promise((resolve) => {
+        const audio = new Audio();
+        let done = false;
+        const timer = setTimeout(() => {
+          if (!done) {
+            done = true;
+            audio.src = '';
+            resolve(false);
+          }
+        }, timeout);
+
+        audio.onerror = () => {
+          if (!done) {
+            done = true;
+            clearTimeout(timer);
+            resolve(false);
+          }
+        };
+
+        audio.oncanplay = () => {
+          if (!done) {
+            done = true;
+            clearTimeout(timer);
+            resolve(true);
+          }
+        };
+
+        audio.src = url;
+        audio.load();
+      });
+    }
+
+    async function checkChannel(url) {
+      let online = await checkURLByFetch(url);
+      if (!online) {
+        online = await checkURLByAudio(url);
+      }
+      return online;
+    }
+
+    // Update progress UI
+    function updateLoadingProgress(current, total, currentName) {
+      const percent = Math.floor((current / total) * 100);
+      loadingProgress.textContent = `${percent}%`;
+      loadingCurrent.textContent = `Checking: ${currentName}`;
+      progressBarFill.style.width = `${percent}%`;
+    }
+
+    // Render the results table rows
+    function renderResults() {
+      resultsBody.innerHTML = '';
+      channels.forEach((ch, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-gray-700';
+
+        // Checkbox
+        const tdCheck = document.createElement('td');
+        tdCheck.className = 'p-2 text-center';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = ch.selected;
+        checkbox.setAttribute('aria-label', `Select channel ${ch.name}`);
+        checkbox.addEventListener('change', () => {
+          ch.selected = checkbox.checked;
+          updateSelectAllHeader();
+        });
+        tdCheck.appendChild(checkbox);
+
+        // Name
+        const tdName = document.createElement('td');
+        tdName.className = 'p-2';
+        tdName.textContent = ch.name;
+
+        // Status
+        const tdStatus = document.createElement('td');
+        tdStatus.className = 'p-2';
+        tdStatus.textContent = ch.status === 'online' ? 'Online' : ch.status === 'offline' ? 'Offline' : 'Checking...';
+        tdStatus.classList.add(ch.status === 'online' ? 'text-green-400' : ch.status === 'offline' ? 'text-red-500' : 'text-yellow-400');
+
+        // URL
+        const tdUrl = document.createElement('td');
+        tdUrl.className = 'p-2 break-words max-w-xs';
+        const urlLink = document.createElement('a');
+        urlLink.href = ch.url;
+        urlLink.target = '_blank';
+        urlLink.rel = 'noopener noreferrer';
+        urlLink.textContent = ch.url;
+        urlLink.className = 'underline hover:text-indigo-400';
+        tdUrl.appendChild(urlLink);
+
+        tr.append(tdCheck, tdName, tdStatus, tdUrl);
+        resultsBody.appendChild(tr);
+      });
+    }
+
+    // Update the header "Select All" checkbox based on individual selections
+    function updateSelectAllHeader() {
+      const allSelected = channels.length > 0 && channels.every(ch => ch.selected);
+      selectAllHeaderCheckbox.checked = allSelected;
+      selectAllHeaderCheckbox.indeterminate = !allSelected && channels.some(ch => ch.selected);
+    }
+
+    // Show loading overlay
+    function showLoading() {
+      loadingOverlay.classList.remove('hidden');
+      loadingProgress.textContent = '0%';
+      loadingCurrent.textContent = 'Initializing...';
+      progressBarFill.style.width = '0%';
+    }
+
+    // Hide loading overlay
+    function hideLoading() {
+      loadingOverlay.classList.add('hidden');
+    }
+
+    // Handle form submission ("Check Channels" button)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      generateFeedback.textContent = '';
+      copyFeedback.textContent = '';
+      outputSection.classList.add('hidden');
+      resultsSection.classList.remove('hidden');
+      resultsBody.innerHTML = '';
+
+      // Get M3U content from file or textarea
+      let content = '';
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        content = await file.text();
+      } else {
+        content = textInput.value.trim();
+      }
+
+      if (!content) {
+        alert('Please upload a file or paste M3U content.');
+        return;
+      }
+
+      // Parse channels
+      channels = parseM3U(content);
+      if (channels.length === 0) {
+        alert('No valid channels found in the playlist.');
+        return;
+      }
+
+      // Initialize UI
+      channels.forEach(ch => {
+        ch.status = 'checking';
+        ch.selected = true;
+      });
+      renderResults();
+      updateSelectAllHeader();
+      showLoading();
+
+      // Check channels sequentially with status update
+      for (let i = 0; i < channels.length; i++) {
+        updateLoadingProgress(i, channels.length, channels[i].name);
+        const isOnline = await checkChannel(channels[i].url);
+        channels[i].status = isOnline ? 'online' : 'offline';
+        renderResults();
+      }
+
+      updateLoadingProgress(channels.length, channels.length, 'Done');
+      hideLoading();
+    });
+
+    // Select Online channels only
+    selectOnlineBtn.addEventListener('click', () => {
+      channels.forEach(ch => ch.selected = (ch.status === 'online'));
+      renderResults();
+      updateSelectAllHeader();
+    });
+
+    // Select All channels
+    selectAllBtn.addEventListener('click', () => {
+      channels.forEach(ch => ch.selected = true);
+      renderResults();
+      updateSelectAllHeader();
+    });
+
+    // Deselect All channels
+    deselectAllBtn.addEventListener('click', () => {
+      channels.forEach(ch => ch.selected = false);
+      renderResults();
+      updateSelectAllHeader();
+    });
+
+    // Header checkbox toggle select/deselect all
+    selectAllHeaderCheckbox.addEventListener('change', () => {
+      const checked = selectAllHeaderCheckbox.checked;
+      channels.forEach(ch => ch.selected = checked);
+      renderResults();
+      updateSelectAllHeader();
+    });
+
+    // Generate new M3U from selection
+    generateBtn.addEventListener('click', () => {
+      if (!channels || channels.length === 0) return;
+      const selectedChannels = channels.filter(ch => ch.selected);
+      if (selectedChannels.length === 0) {
+        alert('No channels selected.');
+        return;
+      }
+      let output = '#EXTM3U\n';
+      selectedChannels.forEach(ch => {
+        output += `#EXTINF:-1,${ch.name}\n${ch.url}\n`;
+      });
+      outputM3U.value = output;
+      outputSection.classList.remove('hidden');
+      generateFeedback.textContent = `${selectedChannels.length} channels included in the new playlist.`;
+      copyFeedback.textContent = '';
+    });
+
+    // Copy to clipboard
+    copyBtn.addEventListener('click', () => {
+      outputM3U.select();
+      outputM3U.setSelectionRange(0, 99999); // mobile compatibility
+      navigator.clipboard.writeText(outputM3U.value).then(() => {
+        copyFeedback.textContent = 'Copied to clipboard!';
+        setTimeout(() => copyFeedback.textContent = '', 3000);
+      });
+    });
+
+    // Download as .m3u file
+    downloadBtn.addEventListener('click', () => {
+      const blob = new Blob([outputM3U.value], { type: 'audio/x-mpegurl' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'cleaned_playlist.m3u';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  });
+
+
+</script>
+
+</body>
+</html>
+
+>>>>>>> 0f18e29 (Initial commit)

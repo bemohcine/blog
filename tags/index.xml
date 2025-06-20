@@ -2,6 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on BlogCine</title>
+<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/tags/</link>
         <description>Recent content in Tags on BlogCine</description>
         <generator>Hugo -- gohugo.io</generator>
@@ -12,38 +13,78 @@
         <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/tags/css/</guid>
+=======
+        <link>/tags/</link>
+        <description>Recent content in Tags on BlogCine</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 07 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Css</title>
+        <link>/tags/css/</link>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>/tags/css/</guid>
+>>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         <item>
         <title>Html</title>
+<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/tags/html/</link>
         <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/tags/html/</guid>
+=======
+        <link>/tags/html/</link>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>/tags/html/</guid>
+>>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         <item>
         <title>Markdown</title>
+<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/tags/markdown/</link>
         <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/tags/markdown/</guid>
+=======
+        <link>/tags/markdown/</link>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>/tags/markdown/</guid>
+>>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         <item>
         <title>Themes</title>
+<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/tags/themes/</link>
         <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/tags/themes/</guid>
+=======
+        <link>/tags/themes/</link>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        
+        <guid>/tags/themes/</guid>
+>>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         <item>
         <title>Example Tag</title>
+<<<<<<< HEAD
         <link>https://bemohcine.github.io/blog/tags/example-tag/</link>
         <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
         
         <guid>https://bemohcine.github.io/blog/tags/example-tag/</guid>
+=======
+        <link>/tags/example-tag/</link>
+        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>/tags/example-tag/</guid>
+>>>>>>> 0f18e29 (Initial commit)
         <description></description>
         </item>
         
