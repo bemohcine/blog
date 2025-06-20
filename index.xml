@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-<<<<<<< HEAD
-        <title>Hugo Theme Stack Starter</title>
-        <link>https://bemohcine.github.io/blog/</link>
-        <description>Recent content on Hugo Theme Stack Starter</description>
-=======
         <title>BlogCine</title>
         <link>https://bemohcine.github.io/blog/</link>
         <description>Recent content on BlogCine</description>
->>>>>>> 1a10db3 (Initial commit)
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Fri, 20 Jun 2025 00:40:11 +0100</lastBuildDate><atom:link href="https://bemohcine.github.io/blog/index.xml" rel="self" type="application/rss+xml" /><item>
